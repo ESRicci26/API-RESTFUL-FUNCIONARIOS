@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Funcionários-WEB-API</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container mt-4">
+    <h2>Gerenciamento Funcionários WEB/API</h2>
+    <form th:action="@{/funcionarios}" th:object="${novoFuncionario}" method="post">
+		<input type="hidden" th:field="*{id}" />
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label for="nomeCompleto">Nome Completo</label>
+                <input type="text" id="nomeCompleto" class="form-control" th:field="*{nomeCompleto}" required />
+            </div>
+            <div class="col-md-4">
+                <label for="dataNascimento">Data de Nascimento</label>
+                <input type="text" id="dataNascimento" class="form-control" th:field="*{dataNascimento}" required />
+            </div>
+            <div class="col-md-4">
+                <label for="salarioMensal">Salário Mensal</label>
+                <input type="text" id="salarioMensal" class="form-control" th:field="*{salarioMensal}" required />
+            </div>
+
+			<div class="col-md-4">
+			    <label for="diasTrabalhados">Dias Trabalhados</label>
+			    <input type="text" id="diasTrabalhados" class="form-control" th:field="*{diasTrabalhados}" required />
+			</div>
+			<div class="col-md-4">
+			    <label for="jornadaMensal">Jornada Mensal</label>
+			    <input type="text" id="jornadaMensal" class="form-control" th:field="*{jornadaMensal}" required />
+			</div>
+			<div class="col-md-4">
+			    <label for="salarioReceber">Salário Receber</label>
+			    <input type="text" id="salarioReceber" class="form-control" th:field="*{salarioReceber}"/>
+			</div>
+			<div class="col-md-4">
+			    <label for="endereco">Endereço</label>
+			    <input type="text" id="endereco" class="form-control" th:field="*{endereco}"/>
+			</div>
+			<div class="col-md-4">
+			    <label for="bairro">Bairro</label>
+			    <input type="text" id="bairro" class="form-control" th:field="*{bairro}"/>
+			</div>
+			<div class="col-md-4">
+			    <label for="cep">CEP</label>
+			    <input type="text" id="cep" class="form-control" th:field="*{cep}"/>
+			</div>
+			<div class="col-md-4">
+			    <label for="cidade">Cidade/UF</label>
+			    <input type="text" id="cidade" class="form-control" th:field="*{cidade}"/>
+			</div>
+			
+			
+        </div>
+        <!-- Campos adicionais -->
+        <button class="btn btn-primary" type="submit">Salvar</button>
+    </form>
+	
+    <table class="table table-striped mt-4">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Data Nascimento</th>
+            <th>Salário</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="funcionario : ${funcionarios}">
+            <td th:text="${funcionario.id}"></td>
+            <td th:text="${funcionario.nomeCompleto}"></td>
+            <td th:text="${funcionario.dataNascimento}"></td>
+            <td th:text="${funcionario.salarioMensal}"></td>
+            <td>
+                <a th:href="@{/funcionarios/editar/{id}(id=${funcionario.id})}" class="btn btn-sm btn-warning">Editar</a>
+                <a th:href="@{/funcionarios/deletar/{id}(id=${funcionario.id})}" class="btn btn-sm btn-danger">Deletar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+	
+	
+</div>
+</body>
+</html>
